@@ -8,7 +8,6 @@ public class Book {
     private String authors;
     private String publisher;
     private String isbn;
-
     private BookGender gender;
     private BookStatus status;
 

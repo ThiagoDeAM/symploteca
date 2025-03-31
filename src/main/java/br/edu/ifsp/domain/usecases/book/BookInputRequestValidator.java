@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.usecases.book;
 
 import br.edu.ifsp.domain.entities.book.Book;
+import br.edu.ifsp.domain.entities.book.BookStatus;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
 
@@ -21,6 +22,15 @@ public class BookInputRequestValidator extends Validator<Book> {
             notification.addError("Authors are null or empty");
         if(nullOrEmpty(book.getPublisher()))
             notification.addError("Publisher is null or empty");
+
+        if (book.getEdition() == null)
+            notification.addError("Edition is null");
+        if (book.getNumberOfPages() == null || book.getNumberOfPages() <= 0)
+            notification.addError("Number of pages is null or <= 0");
+        if (book.getGender() == null)
+            notification.addError("Book gender is null");
+
+
 
         return notification;
     }

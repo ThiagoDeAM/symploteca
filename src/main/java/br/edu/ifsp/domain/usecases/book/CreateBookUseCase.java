@@ -1,6 +1,7 @@
 package br.edu.ifsp.domain.usecases.book;
 
 import br.edu.ifsp.domain.entities.book.Book;
+import br.edu.ifsp.domain.entities.book.BookStatus;
 import br.edu.ifsp.domain.usecases.utils.EntityAlreadyExistsException;
 import br.edu.ifsp.domain.usecases.utils.Notification;
 import br.edu.ifsp.domain.usecases.utils.Validator;
@@ -19,6 +20,9 @@ public class CreateBookUseCase {
 
         if(notification.hasErros())
             throw new IllegalArgumentException(notification.errorMessage());
+
+        if (book.getStatus() != BookStatus.AVAILABLE)
+            throw new IllegalArgumentException("New books must be created as AVAILABLE");
 
         String isbn = book.getIsbn();
         if(bookDAO.findByIsnb(isbn).isPresent())
